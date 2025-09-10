@@ -461,7 +461,7 @@ if __name__ == '__main__':
     if os.path.exists('static'):
         print("✅ Static folder: Found")
     else:
-        print("⚠️ Static folder: Missing")
+        print("⚠️ Static folder: Missing") 
     
     # Initialize database
     if init_db():
