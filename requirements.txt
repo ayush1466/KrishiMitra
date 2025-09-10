@@ -1,0 +1,21 @@
+# Flask web framework
+Flask==2.3.3
+
+# OpenAI API client
+openai==1.3.7
+
+# Additional Flask dependencies (automatically installed with Flask)
+Werkzeug==2.3.7
+Jinja2==3.1.2
+MarkupSafe==2.1.3
+itsdangerous==2.1.2
+click==8.1.7
+
+# CORS handling (optional - you're handling CORS manually)
+# Flask-CORS==4.0.0
+
+# Production server (recommended for deployment)
+gunicorn==21.2.0
+
+# Environment variable management (optional but recommended)
+python-dotenv==1.0.0
