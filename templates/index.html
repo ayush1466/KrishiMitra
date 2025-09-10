@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KisanMitra | AI Krishi Officer</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Your Custom Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <header>
+                <img src="logo.png" alt="App Logo" class="app-logo">
+                <div class="app-title-group">
+                    <h1 id="appTitle">KisanMitra</h1>
+                    <p id="appSubtitle">AI Krishi Officer</p>
+                </div>
+                <button class="icon-btn sidebar-close-btn" id="sidebar-close-btn" aria-label="Close menu"><i class="fas fa-times"></i></button>
+            </header>
+            
+            <div class="sidebar-search">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="sidebar-search-input" placeholder="Search modules...">
+            </div>
+
+            <nav class="quick-questions">
+                <div class="quick-btn-grid" id="quickQuestions">
+                    <button data-view="chat-view" class="quick-query-btn active"><i class="fas fa-seedling"></i> <span>Crop Problems <small>Disease, pest control</small></span></button>
+                    <button data-view="weather-view" class="quick-query-btn"><i class="fas fa-cloud-sun"></i> <span>Weather Today <small>Daily forecast & advice</small></span></button>
+                    <button data-view="prices-view" class="quick-query-btn"><i class="fas fa-chart-line"></i> <span>Crop Prices <small>Market rates & trends</small></span></button>
+                    <button data-view="soil-help-view" class="quick-query-btn"><i class="fas fa-vial"></i> <span>Soil Help <small>Testing & fertilizer</small></span></button>
+                    <button data-view="schemes-view" class="quick-query-btn"><i class="fas fa-landmark"></i> <span>Govt Schemes <small>PM Kisan, subsidies</small></span></button>
+                    <button data-view="helplines-view" class="quick-query-btn"><i class="fas fa-phone"></i> <span>Helplines <small>Call centres & contacts</small></span></button>
+                    <button data-view="resources-view" class="quick-query-btn"><i class="fas fa-hands-helping"></i> <span>Govt Resources <small>Supportive programs & aid</small></span></button>
+                    <button data-view="sustainability-view" class="quick-query-btn"><i class="fas fa-recycle"></i> <span>Sustainability Tools <small>Eco-friendly farming</small></span></button>
+                    <button data-view="news-view" class="quick-query-btn"><i class="fas fa-newspaper"></i> <span>Agri News & Updates <small>Latest farming news</small></span></button>
+                    <button data-view="calendar-view" class="quick-query-btn"><i class="fas fa-calendar-alt"></i> <span>Farming Calendar <small>Seasonal activities & planning</small></span></button>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button data-view="about-view" class="quick-query-btn"><i class="fas fa-info-circle"></i> <span>About Us <small>Our mission & team</small></span></button>
+                <button data-view="settings-view" class="quick-query-btn"><i class="fas fa-cog"></i> <span>Settings <small>Preferences & language</small></span></button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main>
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <button class="icon-btn mobile-menu-btn" id="menu-btn" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+                    <i id="header-icon" class="fas fa-seedling header-icon"></i>
+                    <div class="chat-title" id="header-title">
+                        Crop Problems
+                        <small id="header-subtitle">Disease, pest control</small>
+                    </div>
+                </div>
+                <div class="chat-header-actions">
+                    <button class="icon-btn" id="header-lang-btn" aria-label="Change language"><i class="fas fa-language"></i></button>
+                </div>
+            </div>
+            
+            <div class="main-content-area">
+                <!-- Chat View -->
+                <div id="chat-view" class="view active">
+                    <div class="chat-window" id="chat-window"></div>
+                    <div class="query-section">
+                        <div class="input-group">
+                            <textarea id="queryInput" placeholder="Type your question..." rows="1" data-lang="ml"></textarea>
+                            <div id="suggestions" class="suggestions-container"></div>
+                            <div class="input-actions">
+                                <button class="voice-btn" aria-label="Attach File"><i class="fas fa-paperclip"></i></button>
+                                <button id="voiceBtn" class="voice-btn" aria-label="Voice Input"><i class="fas fa-microphone"></i></button>
+                                <button id="submitBtn" class="submit-btn" aria-label="Send Message"><i class="fas fa-paper-plane"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Placeholder Views -->
+                <div id="weather-view" class="view content-view"><div class="content-card"><h2><i class="fas fa-cloud-sun"></i> Weather Today</h2><p>Feature coming soon...</p></div></div>
+                <div id="prices-view" class="view content-view"><div class="content-card"><h2><i class="fas fa-chart-line"></i> Crop Prices</h2><p>Feature coming soon...</p></div></div>
+                <div id="soil-help-view" class="view content-view"><div class="content-card"><h2><i class="fas fa-vial"></i> Soil Help</h2><p>Feature coming soon...</p></div></div>
+                <div id="schemes-view" class="view content-view"><div class="content-card"><h2><i class="fas fa-landmark"></i> Government Schemes</h2><p>Feature coming soon...</p></div></div>
+                <div id="helplines-view" class="view content-view"><div class="content-card"><h2><i class="fas fa-phone"></i> Helplines</h2><p>Feature coming soon...</p></div></div>
+                <div id="resources-view" class="view content-view"><div class="content-card"><h2><i class="fas fa-hands-helping"></i> Government Resources</h2><p>Feature coming soon...</p></div></div>
+                <div id="sustainability-view" class="view content-view"><div class="content-card"><h2><i class="fas fa-recycle"></i> Sustainability Tools</h2><p>Feature coming soon...</p></div></div>
+                <div id="news-view" class="view content-view"><div class="content-card"><h2><i class="fas fa-newspaper"></i> Agri News & Updates</h2><p>Feature coming soon...</p></div></div>
+                <div id="calendar-view" class="view content-view"><div class="content-card"><h2><i class="fas fa-calendar-alt"></i> Farming Calendar</h2><p>Feature coming soon...</p></div></div>
+
+                <!-- About Us View -->
+                <div id="about-view" class="view content-view">
+                    <div class="content-card">
+                        <h2><i class="fas fa-info-circle"></i> About KisanMitra</h2>
+                        <p>KisanMitra is a revolutionary AI-powered Krishi Officer designed to empower farmers with instant, accurate, and accessible agricultural information. This system aims to become a <strong>“Digital Krishi Officer”</strong>—always available, always learning, and always farmer-first.</p>
+                        <h3>Hackathon Problem Statement</h3>
+                        <h4>Organization: Government of Kerala, Department of Agriculture</h4>
+                        <p><strong>Problem:</strong> Farmers often face critical questions related to pests, weather, inputs, subsidies, and market trends—but timely expert advice is rarely accessible. Agri officers and helplines are overburdened, and existing services don’t scale to support individual needs across diverse regions, languages, and literacy levels.</p>
+                        <p><strong>Challenge:</strong> Build an AI-powered advisory system that allows farmers to ask queries in their own language and receive accurate, context-aware answers instantly.</p>
+                        <h3>Core Features</h3>
+                        <ul>
+                            <li><strong>Natural Language Query Handling:</strong> Ask questions via voice or text in multiple languages.</li>
+                            <li><strong>Multimodal Inputs:</strong> Support for image uploads of diseased crops.</li>
+                            <li><strong>AI-Powered Knowledge Engine:</strong> Provides reliable, tailored answers from fine-tuned agri datasets.</li>
+                            <li><strong>Context Awareness:</strong> Factors in location, crop, and season for personalized advice.</li>
+                            <li><strong>Learning Loop:</strong> Continuously improves using real queries and feedback.</li>
+                        </ul>
+                        <h3>Expected Impact</h3>
+                        <p>To make expert-level farming advice instantly accessible, bridge the communication gap, and support Krishibhavans by automating first-level support.</p>
+                        <h4>Created by <strong>Team KisanMitra</strong> from JG University.</h4>
+                    </div>
+                </div>
+
+                <!-- Settings View -->
+                <div id="settings-view" class="view content-view">
+                    <div class="content-card">
+                        <h2><i class="fas fa-cog"></i> Settings</h2>
+                        <h3>Language</h3>
+                        <p>Select your preferred language for the interface.</p>
+                        <div class="language-list" id="settings-lang-list">
+                            <button class="language-item active"><span class="lang-name">English</span><span class="lang-native">Global</span></button>
+                            <button class="language-item"><span class="lang-name">Hindi</span><span class="lang-native">भारत</span></button>
+                            <button class="language-item"><span class="lang-name">Bengali</span><span class="lang-native">বাংলা</span></button>
+                            <button class="language-item"><span class="lang-name">Tamil</span><span class="lang-native">தமிழ்</span></button>
+                            <button class="language-item"><span class="lang-name">Telugu</span><span class="lang-native">తెలుగు</span></button>
+                            <button class="language-item"><span class="lang-name">Gujarati</span><span class="lang-native">ગુજરાતી</span></button>
+                            <button class="language-item"><span class="lang-name">Marathi</span><span class="lang-native">मराठी</span></button>
+                            <button class="language-item"><span class="lang-name">Punjabi</span><span class="lang-native">ਪੰਜਾਬੀ</span></button>
+                            <button class="language-item"><span class="lang-name">Assamese</span><span class="lang-native">অসমীয়া</span></button>
+                            <button class="language-item"><span class="lang-name">Bodo</span><span class="lang-native">बड़ो</span></button>
+                            <button class="language-item"><span class="lang-name">Dogri</span><span class="lang-native">डोगरी</span></button>
+                            <button class="language-item"><span class="lang-name">Kannada</span><span class="lang-native">ಕನ್ನಡ</span></button>
+                            <button class="language-item"><span class="lang-name">Kashmiri</span><span class="lang-native">کٲشُر</span></button>
+                            <button class="language-item"><span class="lang-name">Konkani</span><span class="lang-native">कोंकणी</span></button>
+                            <button class="language-item"><span class="lang-name">Maithili</span><span class="lang-native">मैथिली</span></button>
+                            <button class="language-item"><span class="lang-name">Malayalam</span><span class="lang-native">മലയാളം</span></button>
+
+                        </div>
+                        <h3 class="setting-title">Data Management</h3>
+                        <button class="action-btn" id="clear-chat-btn"><i class="fas fa-trash-alt"></i> Clear Chat History</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <div class="overlay" id="overlay"></div>
+
+        <!-- Header Language Popover -->
+        <div class="lang-popover" id="lang-popover">
+            <div class="popover-header">
+                <h4>Change Language</h4>
+                <button class="icon-btn" id="popover-close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="popover-search">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="popover-search-input" placeholder="Search language...">
+            </div>
+            <div class="language-list popover" id="popover-lang-list">
+                <!-- Languages are duplicated here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden original elements for backend compatibility -->
+    <div style="display:none;">
+        <div class="response-section" id="responseSection"><div class="response-header"><span class="category-tag" id="categoryTag"></span><button class="speak-btn" id="listenBtn"></button></div><div class="response-content" id="responseContent"></div><div class="response-actions"><button class="rate-btn" id="helpfulBtn"></button><button class="rate-btn" id="notHelpfulBtn"></button></div></div>
+        <div class="stats-section"><h3 id="statsTitle"></h3><div class="stats-grid" id="statsGrid"><div class="stat-card"><span class="stat-number" id="totalQueries"></span><span class="stat-label" id="totalQueriesLabel"></span></div><div class="stat-card"><span class="stat-number" id="todayQueries"></span><span class="stat-label" id="totalQueriesLabel"></span></div></div></div>
+        <div class="about-section"><h3 id="aboutTitle"></h3><p id="aboutText"></p></div>
+        <div class="language-selector"><button class="lang-btn active" id="ml-btn"></button><button class="lang-btn" id="en-btn"></button></div>
+    </div>
+    <div class="loading-overlay" id="loadingOverlay"><div class="loading-spinner"></div><p id="loadingText">Processing...</p></div>
+    
+   <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
